@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./html.png" />
+    <link rel="stylesheet" href="styles.css">
+    <title>HTML 실습과제</title>
+</head>
+<body>
+    <header>
+        <h1>메뉴</h1>
+        <nav>
+            <ul>
+                <li><a href="#profile-info" class="scroll-link">회원가입</a></li>
+                <li><a href="#media" class="scroll-link">프로필 정보</a></li>
+                <li><a href="#contact" class="scroll-link">문의하기</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr/>
+    <main id="profile-info">
+        <section>
+            <h1>회원가입</h1>
+            <form id="profileForm" action="/" method="POST">
+            <label for="username">사용자 이름: </label>
+            <input type="text" id="username" name="username" placeholder="이름을 입력하세요" required>
+            <br/><br/>
+
+            <label for="email">이메일: </label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required>
+            <br/><br/>
+
+            <label for="password">비밀번호: </label>
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+            <br/><br/>
+
+            <label for="age">나이: </label>
+            <input type="number" id="age" name="age" placeholder="" min="1" max="120" required>
+            <br/><br/>
+
+            <label>성별: </label>
+            <input type="radio" id="male" name="gender" value="남" required>
+            <label for="male">남자</label>
+            <input type="radio" id="female" name="gender" value="여" required>
+            <label for="female">여자</label>
+            <br/><br/>
+
+            <label for="introduce">자기소개: </label>
+            <textarea id="introduce" name="introduce" rows="5" cols="50"></textarea>
+            <br/><br/>
+
+            <label for="hobby">좋아하는 취미: </label>
+            <select id="hobby" name="hobby">
+                <option value="soccer">축구</option>
+                <option value="basketball">농구</option>
+            </select>
+            <br/><br/>
+
+            <label for="picture">프로필 사진 업로드: </label>
+            <input type="file" id="picture" name="picture">
+            <br/><br/>
+
+            <label>업데이트 진행상황</label>
+            <progress id="progress" value="50" max="100"></progress>
+            <br/><br/>
+
+            <button type="submit">회원가입</button>
+            <button type="reset">초기화</button>
+            </form>
+        </section>
+    <hr/>
+        <section id="media">
+            <h1>프로필정보</h1>
+            <table border="1" width="1000" height="150">
+            <thead>
+                <tr>
+                <th>항목</th>
+                <th>내용</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                <td>프로필</td>
+                <td id="profilePic">------</td>
+                </tr>
+
+                <tr>
+                <td>이름</td>
+                <td id="profileName">------</td>
+                </tr>
+
+                <tr>
+                <td>이메일</td>
+                <td id="profileEmail">------</td>
+                </tr>
+
+                <tr>
+                <td>나이</td>
+                <td id="profileAge">------</td>
+                </tr>
+
+                <tr>
+                <td>성별</td>
+                <td id="profileGender">------</td>
+                </tr>
+
+                <tr>
+                <td>자기소개</td>
+                <td id="profileIntro">------</td>
+                </tr>
+
+                <tr>
+                <td>취미</td>
+                <td id="profileHobby">------</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                <td>
+                    프로필 정보가 성공적으로 업데이트 되었습니다.
+                </td>
+                </tr>
+            </tfoot>
+            </table>
+        </section>
+    </main>
+    <hr/>
+    <footer id="contact">
+        <h1>문의하기</h1>
+        <p>
+        문의:
+        <a href="https://www.naver.com/">https://www.naver.com/</a>
+        </p>
+        <p>전화: 010-4665-2485</p>
+        <p>주소: 경기도 부천시 길주로 573번길 37, 312동 1404호</p>
+        <h2>오시는길</h2>
+        <iframe
+        id="home"
+        title="home"
+        width="1500"
+        height="500"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.9383583713966!2d126.80388507572174!3d37.50937197205345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9d61cc0ea2dd%3A0x7b736422ef5907a5!2z7Jes7JuU7Zy066i87Iuc7JWEIDPri6jsp4Ag7JWE7YyM7Yq4!5e0!3m2!1sko!2skr!4v1754376040031!5m2!1sko!2skr">
+        </iframe>
+    </footer>
+
+    <script>
+        document.getElementById("profileForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // 새로고침 막기
+
+        // 입력값 읽기
+        const name = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const age = document.getElementById("age").value;
+        const genderInput = document.querySelector('input[name="gender"]:checked');
+        const gender = genderInput ? genderInput.value : "";
+        const intro = document.getElementById("introduce").value;
+        const hobbySelect = document.getElementById("hobby");
+        const hobby = hobbySelect.options[hobbySelect.selectedIndex].text;
+
+        // 프로필 사진 파일 이름
+        const pictureFile = document.getElementById("picture").files[0];
+
+        // 테이블 업데이트
+        document.getElementById("profileName").textContent = name;
+        document.getElementById("profileEmail").textContent = email;
+        document.getElementById("profileAge").textContent = age;
+        document.getElementById("profileGender").textContent = gender;
+        document.getElementById("profileIntro").textContent = intro;
+        document.getElementById("profileHobby").textContent = hobby;
+        document.getElementById("profilePic").textContent = pictureFile
+            ? pictureFile.name
+            : "------";
+
+        alert("프로필 정보가 업데이트되었습니다!");
+        });
+    </script>
+</body>
+</html>
